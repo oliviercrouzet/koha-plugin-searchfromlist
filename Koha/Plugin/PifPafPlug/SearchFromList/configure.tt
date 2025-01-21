@@ -1,0 +1,52 @@
+[% INCLUDE 'doc-head-open.inc' %]
+ <title>Koha SearchFromList plugin: configuration</title>
+<style>
+form input[name="saveconfig"] {
+  margin-top:20px;
+  margin-bottom:20px;
+  display:block;
+}
+thead tr {
+  height: 30px;
+}
+#config li {
+  clear: left;
+  float: none;
+  width: auto;
+  display: inline-block;
+}
+.notes {
+  position: absolute;
+  top: 275px;
+  font-size: 1.0em;
+  color: #666;
+  padding-left: 20px;
+}
+</style>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body>
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+
+[% TRY %]
+    [% PROCESS "$PLUGIN_DIR/lang/${LANG}/configure.inc" %]
+[% CATCH %]
+    [% PROCESS "$PLUGIN_DIR/lang/en/configure.inc" %]
+[% END %]
+
+<script>
+$(document).ready(function(){
+  $('#tool').click(function(){
+    event.preventDefault();
+    location.href = window.location.origin + "/cgi-bin/koha/plugins/run.pl?class=[% CLASS %]&method=tool";
+  });
+
+  $('#config form').on('submit',function() {
+    $('table input, this').each(function(){
+      $(this).val($(this).val().trim());
+    });
+  });
+})
+</script>
+[% INCLUDE 'intranet-bottom.inc' %]

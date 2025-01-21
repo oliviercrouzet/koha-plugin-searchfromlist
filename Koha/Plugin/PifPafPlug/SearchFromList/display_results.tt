@@ -1,0 +1,108 @@
+[% USE raw %]
+[% USE Asset %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Koha Searchfromlist plugin : display results</title>
+<style>
+  tbody .match td {
+    color: #f66209;
+  }
+  .editable input {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+    padding: 5px;
+    font-family: inherit;
+    font-size: inherit;
+  }
+</style>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body>
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+
+[% TRY %]
+    [% PROCESS "$PLUGIN_DIR/lang/${LANG}/display_results.inc" %]
+[% CATCH %]
+    [% PROCESS "$PLUGIN_DIR/lang/en/display_results.inc" %]
+[% END %]
+
+
+[% MACRO jsinclude BLOCK %]
+    [% Asset.js("js/admin-menu.js") | $raw %]
+    [% INCLUDE "datatables.inc" %]
+    [% INCLUDE "columns_settings.inc" %]
+    <script>
+        $(document).ready(function() {
+            [% IF (lang == 'en') %]
+                var MSG_DELETE = "Are you sure you want to delete with this line?"; 
+                var MSG_SWITCH = "Are you sure you want to switch this line to the not found list?";
+            [% ELSE %]
+                var MSG_DELETE = "Êtes-vous sûr de vouloir supprimer cette ligne ?";
+                var MSG_SWITCH = "Êtes-vous sûr de vouloir basculer cette ligne dans la liste des non trouvés ?"
+            [% END %]
+
+            KohaTable("found", {
+                "aaSorting": [],
+                "sPaginationType": "full",
+                "bAutoWidth": false
+            });
+            KohaTable("notfound", {
+                "aaSorting": [],
+                "sPaginationType": "full",
+                "bAutoWidth": false
+            });
+
+            $("a.delete").click(function() {
+                if (! confirm(MSG_DELETE)) return;
+                  var table = $(this).closest("table");
+                  let dt = $(table).DataTable();
+                  dt.row( $(this).closest("tr") ).remove().draw();
+            });
+
+            $('a.switch').click(function() {
+                if (! confirm(MSG_SWITCH)) return;
+                var line = $(this).closest("tr");
+                var new_line = $(line).clone();
+                $(new_line).find("td:first-child, .searchedtitle, .biblionumber, .actions").remove();
+                let dt = $("#found").DataTable();
+                dt.row( $(this).closest("tr") ).remove().draw();
+                new_line.appendTo($("#notfound > tbody"));
+                let dt2 = $("#notfound").DataTable();
+                dt2.row.add(new_line).draw();
+            });
+
+            $(document).on('click', '.editable', function() {
+                if ($('input',this).length) return false;
+                var content = $(this).text();
+                var icon = $('i', this);
+                var input = $('<input type="text">').val(content);
+                $(this).html(input);
+                input.focus();
+
+                input.on('keypress', function() {
+                    $(this).val($(this).val());
+                });
+                input.on('blur', function() {
+                    var newContent = $(this).val();
+                    if (newContent.length) {
+                        $(this).parent().text(newContent);
+                    } else {
+                        $(this).parent().html(icon);
+                    }
+                });
+
+                input.on('keyup', function(e) {
+                    if (e.key === 'Enter') {
+                        $(this).blur();
+                    }
+                });
+            });
+        });
+    </script>
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]
+

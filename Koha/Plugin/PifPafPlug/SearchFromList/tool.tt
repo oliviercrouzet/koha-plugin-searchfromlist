@@ -1,0 +1,86 @@
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Koha Searchfrom list plugin</title>
+<style>
+form fieldset.rows label {
+  float: none;
+  margin-right: 0;
+}
+form fieldset.rows div.hint {
+  margin-left: initial;
+}
+#searchkeys input {
+  width: 150px;
+  margin-left: 5px;
+  margin-right: 20px;
+}
+#searchkeys .number {
+  width: 70px;
+}
+input[type="submit"] {
+  margin-top: 20px;
+}
+.errorfile {
+  position: absolute;
+  left: 800px;
+  top: 90px;
+  opacity: 0.6;
+  color: red;
+  font-weight: 600;
+  padding: 15px 100px;
+  font-size: 14px;
+  background-color: rgb(255, 237, 135);
+}
+</style>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body>
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+
+[% TRY %]
+    [% PROCESS "$PLUGIN_DIR/lang/${LANG}/tool.inc" %]
+[% CATCH %]
+    [% PROCESS "$PLUGIN_DIR/lang/en/tool.inc" %]
+[% END %]
+
+[% MACRO jsinclude BLOCK %]
+<script>
+    $(document).ready(function() {
+        [% IF (lang == 'en') %]
+            var MSG_AUTHOR_KEYS = "The author, publisher and publication date keys can only be used in conjunction with the title.";
+            var MSG_SAME_COLUMN = "Error! You have obviously assigned the same column reference to two search keys.";
+        [% ELSE %]
+            var MSG_AUTHOR_KEYS = "Les clés auteur, éditeur et année ne peuvent être utilisés que conjointement avec le titre.";
+            var MSG_SAME_COLUMN = "Erreur ! vous avez visiblement attribué la même référence de colonne à deux clés de recherche.";
+        [% END %]
+
+        $("#listsearch").on('submit', function(){
+            var iscorrect = true;
+            var columns = []; 
+            $('#searchkeys input[type="text"]').each(function(){
+                $(this).val($(this).val().trim());
+                txt = $(this).val();
+                if (columns[txt]) {
+                    alert(MSG_SAME_COLUMN);
+                    iscorrect = false;
+                } else if (txt) {
+                    columns[txt] = 1;
+                }   
+            });
+            if (!Object.keys(columns).length) iscorrect = false;
+            if ( ($("#author").val()||$("#publisher").val()||$("#year").val()) && !$("#title").val() ) {
+                alert(MSG_AUTHOR_KEYS);
+                iscorrect = false;
+            }
+            return iscorrect;
+        });
+
+        $('body').on('click', function() {
+            $(".errorfile").fadeOut('slow');
+        });
+    });
+</script>
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

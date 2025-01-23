@@ -16,6 +16,9 @@
     font-family: inherit;
     font-size: inherit;
   }
+  .editable {
+      cursor: pointer;
+  }
 </style>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
@@ -78,14 +81,11 @@
             $(document).on('click', '.editable', function() {
                 if ($('input',this).length) return false;
                 var content = $(this).text();
-                var icon = $('i', this);
+                var icon = $('<i class="fa fa-edit" aria-hidden="true"></i>');
                 var input = $('<input type="text">').val(content);
                 $(this).html(input);
                 input.focus();
 
-                input.on('keypress', function() {
-                    $(this).val($(this).val());
-                });
                 input.on('blur', function() {
                     var newContent = $(this).val();
                     if (newContent.length) {

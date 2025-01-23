@@ -16,7 +16,7 @@ use C4::Biblio qw( TransformMarcToKoha );
 use Unicode::Normalize;
 
 ## Here we set our plugin version
-our $VERSION = '1.0';
+our $VERSION = '1.1';
 
 ## Here is our metadata, some keys are required, some are optional
 our $metadata = {
@@ -24,7 +24,7 @@ our $metadata = {
     author => 'Olivier Crouzet',
     description => 'upload a list of documents and launch an automatic search in the library catalog',
     date_authored   => '2025-01-21',
-    date_updated    => '2025-01-21',
+    date_updated    => '2025-01-23',
     minimum_version => '22.11',
     maximum_version => undef,
     version         => $VERSION,

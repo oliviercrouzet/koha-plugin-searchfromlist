@@ -13,6 +13,9 @@ Vous pouvez choisir d'autres champs correspondants (ou alias) parmi ceux qui son
 
 * Les utilisateurs doivent avoir la permission d'utiliser les plugins Outils.
 
+* Des librairies perl supplémentaires (Spreadsheet::Read et Spreadsheet::ReadSXC) sont requises.  
+  Pour les installer : ```sudo apt install libspreadsheet-read-perl```
+
 ### Installation
 
 1. Téléchargez le fichier kpz (Koha Plugin Zip) à partir de la [page des releases](https://github.com/oliviercrouzet/koha-plugin-searchfromlist/releases).  
@@ -60,7 +63,10 @@ You can choose other matching fields (or aliases) from those defined in your Ela
 
 * Koha version 22.11 and later
 
-* Users must have permissions on Tools plugins.                                                          
+* Users must have permissions on Tools plugins.
+
+* Additional perl libraries are required (Spreadsheet::Read and Spreadsheet::ReadSXC).  
+  To install them: ```sudo apt install libspreadsheet-read-perl```
 
 ### Installation
 

@@ -211,8 +211,8 @@ sub parse_content {
             if ( $total_hits and $total_hits == 1 ) {
                 my $record = TransformMarcToKoha({ record => $marcresults->[0] });
                 $record->{'match'} = $fieldname eq 'alterid' ? $cfg->{'alterlabel'} : $fieldname;
-                $record->{'alterid'} = $row->[$colnumbers->{'alterid'}];
-                $record->{'searchedtitle'} = $row->[$colnumbers->{'title'}] if $row->[$colnumbers->{'title'}] ne $record->{'title'} and $fieldname eq 'title';
+                $record->{'alterid'} = $row->[$colnumbers->{'alterid'}] if $colnumbers->{'alterid'};
+                $record->{'searchedtitle'} = $row->[$colnumbers->{'title'}] if $row->[$colnumbers->{'title'}] and $fieldname eq 'title';
                 push @$found, $record;
                 last;
             }

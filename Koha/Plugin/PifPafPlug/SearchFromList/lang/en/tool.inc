@@ -44,7 +44,7 @@
                             <div class="hint">Specify key columns using a single type of reference: headings, numbers or letters. Case is ignored.</div>
                         </li>
                         </ol>
-                        <input type="submit" class="btn btn-primary" value="Import"/>
+                        <input type="submit" class="btn btn-primary" value="Launch serach"/>
                     </fieldset>
                 </fieldset>
             </form>

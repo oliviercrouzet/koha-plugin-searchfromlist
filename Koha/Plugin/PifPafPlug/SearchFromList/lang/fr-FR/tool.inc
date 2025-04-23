@@ -44,7 +44,7 @@
                             <div class="hint">Indiquez les colonnes clés en utilisant un seul type de référence : intitulés, numéros ou lettres. La casse est ignorée.</div>
                         </li>
                         </ol>
-                        <input type="submit" class="btn btn-primary" value="Importer"/>
+                        <input type="submit" class="btn btn-primary" value="Lancer la recherche"/>
                     </fieldset>
                 </fieldset>
             </form>

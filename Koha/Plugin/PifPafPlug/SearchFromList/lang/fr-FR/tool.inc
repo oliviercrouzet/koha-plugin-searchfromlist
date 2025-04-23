@@ -17,11 +17,6 @@
                             <input name="uploadfile" type="file" id="uploadfile" required="required"/>
                             <div class="hint">fichiers acceptés : Excel et Calc (1ère feuille prise en compte uniquement), fichiers csv, fichiers tabulés.</div>
                         </li>
-                        <li>
-                            <label for="noheaders"> Liste sans entête de champ :</label>
-                            <input type="checkbox" name="noheaders"/>
-                            <div class="hint">cochez cette case si votre liste n'en comporte pas.</div>
-                        </li>
                     </ol>
                 </fieldset>
                 <fieldset id="searchkeys" class="rows">

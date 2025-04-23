@@ -17,11 +17,6 @@
                             <input name="uploadfile" type="file" id="uploadfile" required="required"/>
                             <div class="hint">files accepted: Excel and Calc (1st sheet only), csv files, tabulated files.</div>
                         </li>
-                        <li>
-                            <label for="noheaders"> List without field headers:</label>
-                            <input type="checkbox" name="noheaders"/>
-                            <div class="hint">check this box if your list does not include any.</div>
-                        </li>
                     </ol>
                 </fieldset>
                 <fieldset id="searchkeys" class="rows">

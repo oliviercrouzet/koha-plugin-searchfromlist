@@ -16,7 +16,7 @@ use C4::Biblio qw( TransformMarcToKoha );
 use Unicode::Normalize;
 
 ## Here we set our plugin version
-our $VERSION = '1.1';
+our $VERSION = '1.2';
 
 ## Here is our metadata, some keys are required, some are optional
 our $metadata = {

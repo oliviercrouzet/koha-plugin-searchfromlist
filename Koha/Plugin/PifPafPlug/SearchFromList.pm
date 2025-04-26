@@ -166,8 +166,8 @@ sub parse_content {
 
     # convert columns names to array indexes
     my $colnumbers;
+    my ($firstline) = shift @$content;
     if ($type eq 'headers') {
-        my ($firstline) = shift @$content;
         my @headers = map { s/\s+$//; lc $self->unaccent($_) } @$firstline;
         my %indexes;
         @indexes{@headers} = 0..$#headers; 

@@ -32,7 +32,7 @@
                             <label for="alterid"> [% alterlabel | html %] :</label>
                                 <input name="alterid" class="number" type="text" value=""/>
                             <label for="title"> Title:</label>
-                                <input name="title" id="title" type="text" value=""/>
+                                <input name="title" id="title" type="text" value="" required="required"/>
                             <label for="author"> Author:</label>
                                 <input name="author" id="author" type="text" value=""/>
                             <label for="publisher"> Publisher:</label>

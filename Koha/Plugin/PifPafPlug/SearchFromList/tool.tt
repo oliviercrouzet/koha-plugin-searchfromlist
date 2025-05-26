@@ -49,10 +49,8 @@ input[type="submit"] {
 <script>
     $(document).ready(function() {
         [% IF (lang == 'en') %]
-            var MSG_AUTHOR_KEYS = "The author, publisher and publication date keys can only be used in conjunction with the title.";
             var MSG_SAME_COLUMN = "Error! You have obviously assigned the same column reference to two search keys.";
         [% ELSE %]
-            var MSG_AUTHOR_KEYS = "Les clés auteur, éditeur et année ne peuvent être utilisés que conjointement avec le titre.";
             var MSG_SAME_COLUMN = "Erreur ! vous avez visiblement attribué la même référence de colonne à deux clés de recherche.";
         [% END %]
 
@@ -70,10 +68,6 @@ input[type="submit"] {
                 }   
             });
             if (!Object.keys(columns).length) iscorrect = false;
-            if ( ($("#author").val()||$("#publisher").val()||$("#year").val()) && !$("#title").val() ) {
-                alert(MSG_AUTHOR_KEYS);
-                iscorrect = false;
-            }
             return iscorrect;
         });
 

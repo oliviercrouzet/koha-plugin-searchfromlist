@@ -16,7 +16,7 @@ use C4::Biblio qw( TransformMarcToKoha );
 use Unicode::Normalize;
 
 ## Here we set our plugin version
-our $VERSION = '1.2';
+our $VERSION = '1.3';
 
 ## Here is our metadata, some keys are required, some are optional
 our $metadata = {
@@ -191,22 +191,24 @@ sub parse_content {
         foreach my $fieldname (@mainkeys) {
             my $datafield = $row->[$colnumbers->{$fieldname}];
             next unless $datafield;
-            $query = $cfg->{$fieldname}."=".$datafield;
             if ($fieldname eq 'title') {
                 foreach ('author','publisher','pubdate') {
-                    $query .= " AND ".$cfg->{$_}."=".$row->[$colnumbers->{$_}] if ( exists($colnumbers->{$_}) and $row->[$colnumbers->{$_}] );
+                    $datafield .= " AND ".$cfg->{$_}."=".$row->[$colnumbers->{$_}] if ( exists($colnumbers->{$_}) and $row->[$colnumbers->{$_}] );
                 }
-            } else {
-                $query =~ s/[,;\/|]/ /; # When 2 identifiers in same data field concatenated by these characters, search engine would not work.
+            } elsif ($fieldname eq 'isbn') {
+                $datafield =~ tr/ -//d;
+                if ($searchengine eq 'Elasticsearch') {
+                    # keep only first occurrence and make left truncation on isbn 10.
+                    $datafield =~ s/(?:\d{3})?([\dxX]{10}).*/*$1/;
+                } else { # Zebra
+                    $datafield =~ m/([xX\d]+)\b/;
+                    # let truncation not possible with zebra. All we can do is making an 10/13 alternative search if the source is isbn 13.
+                    $datafield = length $1 == 13 ? substr($1,-10).' OR '.$cfg->{$fieldname}.'='.$1 : $1;
+                }
             }
-
-            if ($searchengine eq 'Zebra') {
-                ($error, $marcresults, $total_hits) = SimpleSearch($query);
-            } else {
-                # ElasticSearch
-                my $searcher = Koha::SearchEngine::Search->new({index => $Koha::SearchEngine::BIBLIOS_INDEX});
-                ( $error, $marcresults, $total_hits ) = $searcher->simple_search_compat($query);
-            }
+            $query = $cfg->{$fieldname}."=".$datafield;
+            my $searcher = Koha::SearchEngine::Search->new({index => $Koha::SearchEngine::BIBLIOS_INDEX});
+            ( $error, $marcresults, $total_hits ) = $searcher->simple_search_compat($query);
 
             if ( $total_hits and $total_hits == 1 ) {
                 my $record = TransformMarcToKoha({ record => $marcresults->[0] });
@@ -214,6 +216,7 @@ sub parse_content {
                 $record->{'alterid'} = $row->[$colnumbers->{'alterid'}] if $colnumbers->{'alterid'};
                 $record->{'searchedtitle'} = $row->[$colnumbers->{'title'}] if $row->[$colnumbers->{'title'}] and $fieldname eq 'title';
                 push @$found, $record;
+
                 last;
             }
         }

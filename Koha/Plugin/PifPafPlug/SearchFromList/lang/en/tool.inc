@@ -27,24 +27,34 @@
                         <li>
                             <label for="isbn"> ISBN:</label>
                                 <input name="isbn" class="number" type="text" value=""/>
+                        </li>
+                        <li>
                             <label for="issn"> ISSN:</label>
                                 <input name="issn" class="number" type="text" value=""/>
-                            <label for="alterid"> [% alterlabel | html %] :</label>
+                        </li>
+                        <li>
+                            <label for="alterid"> [% alterlabel | html %]:</label>
                                 <input name="alterid" class="number" type="text" value=""/>
+                        </li>
+                        <li>
                             <label for="title"> Title:</label>
                                 <input name="title" id="title" type="text" value="" required="required"/>
+                        </li>
+                        <li>
                             <label for="author"> Author:</label>
                                 <input name="author" id="author" type="text" value=""/>
+                        </li>
+                        <li>
                             <label for="publisher"> Publisher:</label>
                                 <input name="publisher" id="publisher" type="text" value=""/>
+                        </li>
+                        <li>
                             <label for="pubdate"> Date of publication:</label>
                                 <input name="pubdate" id="pubdate" type="text" value=""/>
                         </li>
-                        <li>
-                            <div class="hint">Specify key columns using a single type of reference: headings, numbers or letters. Case is ignored.</div>
-                        </li>
                         </ol>
-                        <input type="submit" class="btn btn-primary" value="Launch serach"/>
+                        <div class="hint">Specify key columns using a single type of reference: headings, numbers or letters. Case is ignored.</div>
+                        <input type="submit" class="btn btn-primary" value="Launch search"/>
                     </fieldset>
                 </fieldset>
             </form>

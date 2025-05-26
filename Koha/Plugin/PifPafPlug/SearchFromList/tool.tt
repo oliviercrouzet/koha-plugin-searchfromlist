@@ -2,12 +2,23 @@
 [% INCLUDE 'doc-head-open.inc' %]
 <title>Koha Searchfrom list plugin</title>
 <style>
-form fieldset.rows label {
+#searchkeys label {
   float: none;
   margin-right: 0;
+  width:auto;
 }
-form fieldset.rows div.hint {
+#searchkeys div.hint {
   margin-left: initial;
+}
+#searchkeys li {
+  display:inline-flex;
+  float:none;
+  width:auto;
+  padding-top: 0.6em;
+}
+#searchkeys fieldset {
+  margin-top:0;
+  padding-top:0;
 }
 #searchkeys input {
   width: 150px;

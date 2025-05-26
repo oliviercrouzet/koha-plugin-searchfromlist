@@ -27,23 +27,33 @@
                         <li>
                             <label for="isbn"> ISBN :</label>
                                 <input name="isbn" class="number" type="text" value=""/>
+                        </li>
+                        <li>
                             <label for="issn"> ISSN :</label>
                                 <input name="issn" class="number" type="text" value=""/>
+                        </li>
+                        <li>
                             <label for="alterid"> [% alterlabel | html %] :</label>
                                 <input name="alterid" class="number" type="text" value=""/>
+                        </li>
+                        <li>
                             <label for="title"> Titre :</label>
                                 <input name="title" id="title" type="text" value="" required="required"/>
+                        </li>
+                        <li>
                             <label for="author"> Auteur :</label>
                                 <input name="author" id="author" type="text" value=""/>
+                        </li>
+                        <li>
                             <label for="publisher"> Éditeur :</label>
                                 <input name="publisher" id="publisher" type="text" value=""/>
+                        </li>
+                        <li>
                             <label for="pubdate"> Date de publ. :</label>
                                 <input name="pubdate" id="pubdate" type="text" value=""/>
                         </li>
-                        <li>
-                            <div class="hint">Indiquez les colonnes clés en utilisant un seul type de référence : intitulés, numéros ou lettres. La casse est ignorée.</div>
-                        </li>
                         </ol>
+                        <div class="hint">Indiquez les colonnes clés en utilisant un seul type de référence : intitulés, numéros ou lettres. La casse est ignorée.</div>
                         <input type="submit" class="btn btn-primary" value="Lancer la recherche"/>
                     </fieldset>
                 </fieldset>

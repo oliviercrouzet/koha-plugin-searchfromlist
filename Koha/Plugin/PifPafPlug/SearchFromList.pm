@@ -57,7 +57,8 @@ sub tool {
     } else {
         my $template = $self->get_template({ file => 'tool.tt' });
         my $cfg = decode_json($self->retrieve_data('cfg')); 
-        $template->param( 'alterlabel' => $cfg->{'alterlabel'}, 'error' => $cgi->param('error'));
+        my $error = $cgi->param('error');
+        $template->param( 'alterlabel' => $cfg->{'alterlabel'}, 'error' => $error );
         $self->output_html( $template->output() );
 
     }

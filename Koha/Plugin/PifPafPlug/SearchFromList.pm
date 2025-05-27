@@ -193,7 +193,7 @@ sub parse_content {
             next unless $datafield;
             if ($fieldname eq 'title') {
                 foreach ('author','publisher','pubdate') {
-                    $datafield .= " AND ".$cfg->{$_}."=".$row->[$colnumbers->{$_}] if ( exists($colnumbers->{$_}) and $row->[$colnumbers->{$_}] );
+                    $datafield .= " AND ".$cfg->{$_}."=".$row->[$colnumbers->{$_}] if $colnumbers->{$_} and $row->[$colnumbers->{$_}];
                 }
             } elsif ($fieldname eq 'isbn') {
                 $datafield =~ tr/ -//d;
@@ -214,7 +214,7 @@ sub parse_content {
                 my $record = TransformMarcToKoha({ record => $marcresults->[0] });
                 $record->{'match'} = $fieldname eq 'alterid' ? $cfg->{'alterlabel'} : $fieldname;
                 $record->{'alterid'} = $row->[$colnumbers->{'alterid'}] if $colnumbers->{'alterid'};
-                $record->{'searchedtitle'} = $row->[$colnumbers->{'title'}] if $row->[$colnumbers->{'title'}] and $fieldname eq 'title';
+                $record->{'searchedtitle'} = $row->[$colnumbers->{'title'}];
                 push @$found, $record;
 
                 last;

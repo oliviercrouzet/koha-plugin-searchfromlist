@@ -19,6 +19,10 @@
   .editable {
       cursor: pointer;
   }
+  h2 span {
+    font-size:70%;
+    font-weight:500;
+  }
 </style>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>

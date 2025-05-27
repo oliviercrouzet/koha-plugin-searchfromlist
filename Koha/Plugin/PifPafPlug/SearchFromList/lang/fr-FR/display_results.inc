@@ -6,7 +6,7 @@
         <div id="toolbar" class="btn-toolbar">
              <div class="btn-group"><a id="searchlist" class="btn btn-default" href="/cgi-bin/koha/plugins/run.pl?class=[% CLASS %]&method=[% METHOD %]"><i class="fa fa-plus"></i> Nouvelle recherche</a></div>
         </div>
-            <h2> Résultats de la recherche</h2>
+            <h2> Résultats de la recherche <span>[fichier source : <i>[% filename %]</i>]</span></h2>
 
             [% WRAPPER tabs %]
 

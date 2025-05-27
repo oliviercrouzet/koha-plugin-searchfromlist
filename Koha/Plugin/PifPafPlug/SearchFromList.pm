@@ -241,6 +241,7 @@ sub display_results {
         foundloop     => $found,
         notfoundloop  => $notfound,
         alterlabel    => $alterlabel, 
+        filename      => $self->{'cgi'}{'param'}{'uploadfile'}[0],
     );
 
     $self->output_html( $template->output() );

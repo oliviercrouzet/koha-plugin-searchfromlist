@@ -72,7 +72,7 @@
                 var new_line = $(line).clone();
                 var searchedtitle = $(new_line).find(".searchedtitle").text();
                 $(new_line).find("td:first-child, .searchedtitle, .biblionumber, .actions").remove();
-                $(new_line).find("td:first-child").text(searchedtitle);
+                searchedtitle && $(new_line).find("td:first-child").text(searchedtitle);
                 let dt = $("#found").DataTable();
                 dt.row( $(this).closest("tr") ).remove().draw();
                 new_line.appendTo($("#notfound > tbody"));

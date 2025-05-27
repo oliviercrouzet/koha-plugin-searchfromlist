@@ -16,7 +16,7 @@ use C4::Biblio qw( TransformMarcToKoha );
 use Unicode::Normalize;
 
 ## Here we set our plugin version
-our $VERSION = '1.3';
+our $VERSION = '1.4';
 
 ## Here is our metadata, some keys are required, some are optional
 our $metadata = {
@@ -186,7 +186,9 @@ sub parse_content {
     my $found;
     my $notfound;
     my $cfg = decode_json($self->retrieve_data('cfg')); 
+    my $i = 1;
     foreach my $row (@$content) {
+        $i++;
         my ( $error, $marcresults, $total_hits, $query );
 
         foreach my $fieldname (@mainkeys) {
@@ -213,6 +215,7 @@ sub parse_content {
 
             if ( $total_hits and $total_hits == 1 ) {
                 my $record = TransformMarcToKoha({ record => $marcresults->[0] });
+                $record->{'line'} = $i;
                 $record->{'match'} = $fieldname eq 'alterid' ? $cfg->{'alterlabel'} : $fieldname;
                 $record->{'alterid'} = $row->[$colnumbers->{'alterid'}] if $colnumbers->{'alterid'};
                 $record->{'searchedtitle'} = $row->[$colnumbers->{'title'}];
@@ -227,6 +230,7 @@ sub parse_content {
             while (my($fieldname,$colnumber) = each %$colnumbers) {
                 $unknown->{$fieldname} = $row->[$colnumber];
             }
+            $unknown->{'line'} = $i;
             push @$notfound, $unknown;
         }
     }

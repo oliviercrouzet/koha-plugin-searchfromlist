@@ -44,6 +44,7 @@
     [% INCLUDE "columns_settings.inc" %]
     <script>
         $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
             [% IF (lang == 'en') %]
                 var MSG_DELETE = "Are you sure you want to delete with this line?"; 
                 var MSG_SWITCH = "Are you sure you want to switch this line to the not found list?";
@@ -75,8 +76,8 @@
                 var line = $(this).closest("tr");
                 var new_line = $(line).clone();
                 var searchedtitle = $(new_line).find(".searchedtitle").text();
-                $(new_line).find("td:first-child, .searchedtitle, .biblionumber, .actions").remove();
-                searchedtitle && $(new_line).find("td:first-child").text(searchedtitle);
+                $(new_line).find("td:nth-child(2),.searchedtitle, .biblionumber, .actions").remove();
+                searchedtitle && $(new_line).find("td:nth-child(2)").text(searchedtitle);
                 let dt = $("#found").DataTable();
                 dt.row( $(this).closest("tr") ).remove().draw();
                 new_line.appendTo($("#notfound > tbody"));

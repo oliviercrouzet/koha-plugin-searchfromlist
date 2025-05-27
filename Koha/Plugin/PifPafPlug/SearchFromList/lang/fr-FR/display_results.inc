@@ -21,6 +21,7 @@
                             <table id="found">
                                 <thead>
                                     <tr>
+                                        <th><span data-toggle="tooltip" data-original-title="Ligne dans le fichier source">No </span></th>
                                         <th>Match</th>
                                         <th>Titre</th>
                                         <th>Titre cherché</th>
@@ -38,6 +39,7 @@
                                 <tbody>
                                     [% FOREACH found IN foundloop %]
                                         [% IF ( found.match == 'title' ) %]<tr class="match">[% ELSE %]<tr>[% END %]
+                                            <td>[% found.line | html %]</td>
                                             <td>[% found.match | html %]</td>
                                             <td>[% found.title | html %] : [% found.subtitle | html %]</td>
                                             <td class="searchedtitle">[% found.searchedtitle | html %]</td>
@@ -72,6 +74,7 @@
                             <table id="notfound">
                                 <thead>
                                     <tr>
+                                        <th><span data-toggle="tooltip" data-original-title="Ligne dans le fichier source">No </span></th>
                                         <th>Titre</th>
                                         <th>Auteur</th>
                                         <th>Éditeur</th>
@@ -85,6 +88,7 @@
                                 <tbody>
                                     [% FOREACH notfound IN notfoundloop %]
                                         <tr>
+                                            <td>[% notfound.line | html %]</td>
                                             <td>[% notfound.title | html %]</td>
                                             <td>[% notfound.author | html %]</td>
                                             <td>[% notfound.publisher | html %]</td>

@@ -18,27 +18,33 @@ Vous pouvez choisir d'autres champs correspondants (ou alias) parmi ceux qui son
 
 ### Installation
 
-1. Téléchargez le fichier kpz (Koha Plugin Zip) à partir de la [page des releases](https://github.com/oliviercrouzet/koha-plugin-searchfromlist/releases).  
-
-2. Dans le fichier de configuration de Koha (koha-conf.xml) :
+1. Dans le fichier de configuration de Koha (koha-conf.xml) :
 
 - vérifiez  que l'utilisation des plugins est activée  
 
     `<enable_plugins>1</enable_plugins>`
 
-- assurez-vous que le chemin du répertoire de plugin est défini  
+- assurez-vous que le chemin du répertoire de plugin est défini.  
   
     `<plugindir>my_plugin_dir_path</plugindir>`  
 
-3. Transférez le fichier kpz ou zip dans ce répertoire et décompressez     
+2. Installez le code
 
-    `unzip koha-plugin-searchfromlist-[version].kpz`
+- Via git (recommandé) :  
+    
+   `git clone https://github.com/oliviercrouzet/koha-plugin-searchfromlist.git koha-plugin-searchfromlist`
 
-4. Initialisez la prise en charge du plugin  
+- Sinon, placez vous à l'intérieur du répertoire (à créer si necessaire), téléchargez un fichier kpz (Koha Plugin Zip) et décompressez :  
+
+   ```
+   wget https://github.com/oliviercrouzet/koha-plugin-searchfromlist/releases/download/[version]/koha-plugin-searchfromlist-[version].kpz
+   unzip koha-plugin-searchfromlist-[version].kpz    
+   ```
+3. Initialisez la prise en charge du plugin  
 
     `perl [KOHADIR]/misc/devel/install_plugins.pl`  
 
-5. Relancez le service Plack  
+4. Relancez le service Plack  
 
 - Quelque chose comme :
 
@@ -70,9 +76,7 @@ You can choose other matching fields (or aliases) from those defined in your Ela
 
 ### Installation
 
-1. Download the kpz (Koha Plugin Zip) file from the [releases page](https://github.com/oliviercrouzet/koha-plugin-searchfromlist/releases).  
-
-2. In Koha configuration file (koha-conf.xml):
+1. In Koha configuration file (koha-conf.xml):
 
 - Check that plugins are enabled   
 
@@ -82,15 +86,23 @@ You can choose other matching fields (or aliases) from those defined in your Ela
 
     `<plugindir>my_plugin_dir_path</plugindir>`
 
-3. Transfer the kpz or zip file to this directory and unzip it  
+2. Install code
 
-    `unzip koha-plugin-searchfromlist-[version].kpz`
+- Via git (recommended) :  
+    
+   `git clone https://github.com/oliviercrouzet/koha-plugin-searchfromlist.git koha-plugin-searchfromlist`
 
-4. Initialize plugin support  
+- Alternatively, place yourself inside the directory (to be created if necessary), download a kpz file (Koha Plugin Zip) and unzip it.
+
+   ```
+   wget https://github.com/oliviercrouzet/koha-plugin-searchfromlist/releases/download/[version]/koha-plugin-searchfromlist-[version].kpz
+   unzip koha-plugin-searchfromlist-[version].kpz    
+   ```
+3. Initialize plugin support  
 
     `perl [KOHADIR]/misc/devel/install_plugins.pl`
 
-5. Restart Plack service
+4. Restart Plack service
 
 - Something like:
 

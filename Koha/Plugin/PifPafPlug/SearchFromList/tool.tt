@@ -60,9 +60,9 @@ input[type="submit"] {
 <script>
     $(document).ready(function() {
         [% IF (lang == 'en') %]
-            var MSG_SAME_COLUMN = "Error! You have obviously assigned the same column reference to two search keys.";
+            var MSG_SAME_COLUMN = "Error ?\n You have obviously assigned the same column reference to two search keys. Continue ?";
         [% ELSE %]
-            var MSG_SAME_COLUMN = "Erreur ! vous avez visiblement attribué la même référence de colonne à deux clés de recherche.";
+            var MSG_SAME_COLUMN = "Erreur ?\n Vous avez visiblement attribué la même référence de colonne à deux clés de recherche. Continuez ?";
         [% END %]
 
         $("#listsearch").on('submit', function(){
@@ -72,8 +72,7 @@ input[type="submit"] {
                 $(this).val($(this).val().trim());
                 txt = $(this).val();
                 if (columns[txt]) {
-                    alert(MSG_SAME_COLUMN);
-                    iscorrect = false;
+                    if (! confirm(MSG_SAME_COLUMN)) iscorrect = false;
                 } else if (txt) {
                     columns[txt] = 1;
                 }   

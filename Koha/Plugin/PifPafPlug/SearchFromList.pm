@@ -187,6 +187,8 @@ sub parse_content {
     my $notfound;
     my $cfg = decode_json($self->retrieve_data('cfg')); 
     my $i = 1;
+
+    $cfg->{'isbn'} .= ',rtrn' if $searchengine eq 'Zebra' and $cfg->{'isbn'};
     foreach my $row (@$content) {
         $i++;
         my ( $error, $marcresults, $total_hits, $query );
@@ -201,12 +203,13 @@ sub parse_content {
             } elsif ($fieldname eq 'isbn') {
                 $datafield =~ tr/ -//d;
                 if ($searchengine eq 'Elasticsearch') {
-                    # keep only first occurrence and make left truncation on isbn 10.
-                    $datafield =~ s/(?:\d{3})?([\dxX]{10}).*/*$1/;
+                    # keep only first occurrence and make left truncation on isbn 10 and right one to get round a possible difference in the control number (last digit)
+                    $datafield =~ s/(?:\d{3})?(\d{9})[\dxX].*/*$1?/;
                 } else { # Zebra
-                    $datafield =~ m/([xX\d]+)\b/;
-                    # let truncation not possible with zebra. All we can do is making an 10/13 alternative search if the source is isbn 13.
-                    $datafield = length $1 == 13 ? substr($1,-10).' OR '.$cfg->{$fieldname}.'='.$1 : $1;
+                    $datafield =~ m/(\d+)[\dxX]/;
+                    # left truncation not possible with zebra. All we can do is making an 10/13 alternative search if the source is isbn 13.
+                    $datafield = length $1 == 12 ? substr($1,-9)." OR ".$cfg->{$fieldname}."=".$1 : $1." OR ".$cfg->{$fieldname}."=978".$1;
+
                 }
             }
             $query = $cfg->{$fieldname}."=".$datafield;

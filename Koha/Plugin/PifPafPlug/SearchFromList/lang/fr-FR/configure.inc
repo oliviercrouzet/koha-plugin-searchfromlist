@@ -7,7 +7,7 @@
             <fieldset id="config" class="rows">
                 <legend>Configuration</legend>
                 <p>Ce plugin peut fonctionner avec les moteurs de recherche ElasticSearch ou Zebra.<br/>La recherche se fait par identifiant (isbn, issn et autre) ou par titre (en combinaison avec l'auteur, l'éditeur et la date d'édition), selon le choix que vous faîtes dans l'interface <i><a href="#" id="tool">Lancer l'outil</a>.</i><br/>
-                Un mapping par défaut est établi entre les types de clé proposés par le plugin et les champs de recherche du moteur utilisé.<br/>Vous pouvez choisir d'autres champs correspondants (ou alias) parmi ceux qui sont définis dans votre <a href="/cgi-bin/koha/admin/searchengine/elasticsearch/mappings.pl">configuration ElasticSearch</a> ou dans le fichier <i>ccl.properties</i> pour Zebra.</p>
+                Un mapping par défaut est établi entre les types de clé proposés par le plugin et les champs de recherche du moteur utilisé.<br/>Vous pouvez choisir d'autres champs correspondants (ou alias) parmi ceux qui sont définis dans votre <a href="/cgi-bin/koha/admin/searchengine/elasticsearch/mappings.pl">configuration ElasticSearch</a> ou dans les fichiers <i>ccl.properties et biblio-koha-indexdefs.xml</i> pour Zebra.</p>
 
             <form method="get">
                 <input type="hidden" name="class" value="[% CLASS %]"/>
